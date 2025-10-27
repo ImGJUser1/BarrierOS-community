@@ -1,0 +1,14 @@
+name: Validate Backups
+on:
+  push:
+    paths:
+      - 'backups/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON
+        run: |
+          find backups -name "*.json" -exec jq . {} > /dev/null \;
